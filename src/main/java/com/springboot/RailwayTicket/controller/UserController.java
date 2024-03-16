@@ -1,5 +1,7 @@
 package com.springboot.RailwayTicket.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -15,29 +17,30 @@ import com.springboot.RailwayTicket.service.UserService;
 
 @RestController
 @CrossOrigin
-@RequestMapping("/ticket")
+@RequestMapping("/usersDetails")
 public class UserController {
 	
-	public UserController() {
-		// TODO Auto-generated constructor stub
-		System.out.println("23456");
-	}
-
 	@Autowired
-	private UserService service;		
+	private UserService userService;
 	
-	@PostMapping("/up")
-	public ResponseEntity<UserModel> createUser(@RequestBody UserModel userModel){
+	@GetMapping("/getUserDetails")
+	public List<UserModel> getUserDetails(){
 		System.out.println("123456789");
-		service.createUser(userModel);
-		return new ResponseEntity<UserModel>(HttpStatus.OK);
+		return userService.getUserDetails();
+		//return new ResponseEntity<>("Data is comming to controller", HttpStatus.ACCEPTED);
+		
+	}
+	
+	@PostMapping("/signup")
+	public UserModel createUser(@RequestBody UserModel userModel){
+		
+		UserModel userModelResponse = new UserModel();
+		
+		System.out.println(userModel.toString());
+		userModelResponse = userService.createUser(userModel);
+		return userModelResponse;
 		
 		
 	}
 	
-	@GetMapping("/sign")
-	public ResponseEntity<String> getUser(){
-		return new ResponseEntity<String>("Sucess",HttpStatus.OK);
-		
-	}
 }

@@ -1,12 +1,15 @@
 package com.springboot.RailwayTicket.service;
 
+import java.util.List;
+
 import org.springframework.stereotype.Component;
 
 import com.springboot.RailwayTicket.model.UserModel;
 
+@Component
 public interface UserService {
 
-	public void createUser(UserModel userModel);
+	public UserModel createUser(UserModel userModel);
 
+	public List<UserModel> getUserDetails();
 }
-

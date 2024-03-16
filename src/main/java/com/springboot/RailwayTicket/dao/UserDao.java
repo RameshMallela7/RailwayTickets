@@ -8,7 +8,4 @@ import com.springboot.RailwayTicket.entity.User;
 @Repository
 public interface UserDao extends JpaRepository<User, Integer>{
 	
-	
-	
-
 }

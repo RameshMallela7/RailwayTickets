@@ -6,10 +6,12 @@ import java.util.Date;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+@ToString
 public class UserModel {
 	
 	private int userId;
@@ -18,7 +20,7 @@ public class UserModel {
 	private String email;
 	private String fristName;
 	private String lastName;
-	private Date dateOfBirth;
+	private String dateOfBirth;
 	private BigDecimal phoneNumber;
 	private String address;
 

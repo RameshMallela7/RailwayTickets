@@ -13,10 +13,5 @@ public class RailwayTicketConfiguration {
 		return new ModelMapper();
 		
 	}
-	/*
-	@Bean
-	public UserService userService() {
-		return new UserServiceImpl();
-	}*/
 
 }
