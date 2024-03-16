@@ -1,5 +1,14 @@
 package com.springboot.RailwayTicket.dao;
 
-public class UserDao {
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
+
+import com.springboot.RailwayTicket.entity.User;
+
+@Repository
+public interface UserDao extends JpaRepository<User, Integer>{
+	
+	
+	
 
 }

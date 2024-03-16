@@ -1,5 +1,12 @@
 package com.springboot.RailwayTicket.service;
 
-public class UserService {
+import org.springframework.stereotype.Component;
+
+import com.springboot.RailwayTicket.model.UserModel;
+
+public interface UserService {
+
+	public void createUser(UserModel userModel);
 
 }
+
