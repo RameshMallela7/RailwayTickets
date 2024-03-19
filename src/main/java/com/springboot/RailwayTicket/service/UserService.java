@@ -4,12 +4,15 @@ import java.util.List;
 
 import org.springframework.stereotype.Component;
 
-import com.springboot.RailwayTicket.model.UserModel;
+import com.springboot.RailwayTicket.model.UserDetailsModel;
+
 
 @Component
 public interface UserService {
 
-	public UserModel createUser(UserModel userModel);
+	public UserDetailsModel createUser(UserDetailsModel UserDetailsModel);
 
-	public List<UserModel> getUserDetails();
+	public List<UserDetailsModel> getUserDetails();
+
+	public UserDetailsModel getUserById(int id);
 }

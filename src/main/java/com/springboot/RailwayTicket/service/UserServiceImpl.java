@@ -1,7 +1,7 @@
 package com.springboot.RailwayTicket.service;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.apache.commons.lang3.StringUtils;
 import org.modelmapper.ModelMapper;
@@ -9,11 +9,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.springboot.RailwayTicket.dao.UserDao;
-import com.springboot.RailwayTicket.entity.User;
+import com.springboot.RailwayTicket.entity.UserDetails;
 import com.springboot.RailwayTicket.excption.UserExcption;
-import com.springboot.RailwayTicket.model.UserModel;
+import com.springboot.RailwayTicket.model.UserDetailsModel;
+
+import jakarta.transaction.Transactional;
 
 @Service
+@Transactional
 public class UserServiceImpl implements UserService {
 
 	@Autowired
@@ -24,23 +27,19 @@ public class UserServiceImpl implements UserService {
 	
 
 	@Override
-	public UserModel createUser(UserModel userModel) {
+	public UserDetailsModel createUser(UserDetailsModel userDetailsModel) {
 		// TODO Auto-generated method stub
 		
-		System.out.println("get data to service " + userModel.toString());
+		System.out.println("get data to service " + userDetailsModel.toString());
 		
 		try {
-			User user = modelMapper.map(userModel, User.class);
-			
-			User userResponse = userDao.save(user);
-			
-			if(!StringUtils.equals(userModel.getUserName(), user.getUserName())) {
+			UserDetails userDetails = modelMapper.map(userDetailsModel, UserDetails.class);
+			UserDetails userResponse = userDao.save(userDetails);
+			if(!StringUtils.equals(userDetailsModel.getUserName(), userDetails.getUserName())) {
 				throw new UserExcption("Expction while inserting data in database");
 			}
-			
-			UserModel userModelResponse = modelMapper.map(userResponse, UserModel.class);
-			
-			return userModelResponse;
+			UserDetailsModel UserDetailsModelResponse = modelMapper.map(userResponse, UserDetailsModel.class);
+			return UserDetailsModelResponse;
 			
 		}catch (Exception e) {
 			throw new UserExcption("Model mapper excetion");
@@ -49,18 +48,24 @@ public class UserServiceImpl implements UserService {
 
 
 	@Override
-	public List<UserModel> getUserDetails() {
+	public List<UserDetailsModel> getUserDetails() {
 		// TODO Auto-generated method stub
-		List<UserModel> userModelResponseList = new ArrayList();
-		List<User>  userListResponse = userDao.findAll();
+		List<UserDetails>  userDetailsListResponse = userDao.findAll();
 		
-		for(User userResponse: userListResponse) {
+		return userDetailsListResponse.stream()
+				.map(userResponse -> modelMapper.map(userResponse, UserDetailsModel.class))
+				.collect(Collectors.toList());
+		
+		
+	}
 
-			UserModel userModelResponse = modelMapper.map(userResponse, UserModel.class);
-			userModelResponseList.add(userModelResponse);
-		}
-		return userModelResponseList;
-		
+
+	@Override
+	public UserDetailsModel getUserById(int id) {
+		// TODO Auto-generated method stub
+		UserDetails userResponse = userDao.findById(id).get();
+		UserDetailsModel UserDetailsModelResponse = modelMapper.map(userResponse, UserDetailsModel.class);
+		return UserDetailsModelResponse;
 		
 	}
 	
