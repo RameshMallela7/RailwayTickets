@@ -2,17 +2,24 @@ package com.springboot.RailwayTicket.service;
 
 import java.util.List;
 
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
 
-import com.springboot.RailwayTicket.model.UserDetailsModel;
+import com.springboot.RailwayTicket.authentication.AuthenticationResponse;
+import com.springboot.RailwayTicket.authentication.RegisterRequest;
+import com.springboot.RailwayTicket.entity.User;
+
 
 
 @Component
 public interface UserService {
 
-	public UserDetailsModel createUser(UserDetailsModel UserDetailsModel);
+	public AuthenticationResponse createUser(RegisterRequest registerRequest);
 
-	public List<UserDetailsModel> getUserDetails();
+	public List<User> getUserDetails();
 
-	public UserDetailsModel getUserById(int id);
+	public UserDetails getUserById(int id);
+
+	//UserDetailsService userDetailsService();
+
 }

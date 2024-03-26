@@ -1,27 +1,22 @@
 package com.springboot.RailwayTicket.model;
 
-import java.math.BigDecimal;
-import java.util.Date;
+import com.springboot.RailwayTicket.utils.RolesEnum;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 
-@Data
-@AllArgsConstructor
-@NoArgsConstructor
-@ToString
-public class UserDetailsModel {
+
+public class UserProfileModelDummy {
 	
-	private int userId;
-	private String userName;
-	private String password;
-	private String email;
+	private Long userId;
 	private String fristName;
 	private String lastName;
+	private RolesEnum roles;
+	private String email;
 	private String dateOfBirth;
-	private BigDecimal phoneNumber;
+	private String phoneNumber;
 	private String address;
 
 }

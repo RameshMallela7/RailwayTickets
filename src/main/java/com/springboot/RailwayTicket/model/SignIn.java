@@ -9,9 +9,9 @@ import lombok.ToString;
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString
-public class UserModel {
-
-	private int userId;
+public class SignIn {
+	
 	private String userName;
 	private String password;
+
 }

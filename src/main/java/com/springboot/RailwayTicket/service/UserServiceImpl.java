@@ -1,17 +1,18 @@
 package com.springboot.RailwayTicket.service;
 
+import java.util.HashMap;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import org.apache.commons.lang3.StringUtils;
-import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import com.springboot.RailwayTicket.authentication.AuthenticationResponse;
+import com.springboot.RailwayTicket.authentication.RegisterRequest;
 import com.springboot.RailwayTicket.dao.UserDao;
-import com.springboot.RailwayTicket.entity.UserDetails;
+import com.springboot.RailwayTicket.entity.User;
 import com.springboot.RailwayTicket.excption.UserExcption;
-import com.springboot.RailwayTicket.model.UserDetailsModel;
 
 import jakarta.transaction.Transactional;
 
@@ -23,51 +24,79 @@ public class UserServiceImpl implements UserService {
 	public UserDao userDao;
 	
 	@Autowired
-	public ModelMapper modelMapper;
+	public PasswordEncoder encoder;
 	
+	@Autowired
+	public JwtTokenService jwtTokenService;
 
+	
 	@Override
-	public UserDetailsModel createUser(UserDetailsModel userDetailsModel) {
-		// TODO Auto-generated method stub
-		
-		System.out.println("get data to service " + userDetailsModel.toString());
-		
+	public AuthenticationResponse createUser(RegisterRequest registerRequest) {
+		System.out.println("get data to service " + registerRequest.toString());
 		try {
-			UserDetails userDetails = modelMapper.map(userDetailsModel, UserDetails.class);
-			UserDetails userResponse = userDao.save(userDetails);
-			if(!StringUtils.equals(userDetailsModel.getUserName(), userDetails.getUserName())) {
-				throw new UserExcption("Expction while inserting data in database");
+			User user = User.builder()
+			.userName(registerRequest.getUserName())
+			.password(encoder.encode(registerRequest.getPassword()))
+			.email(registerRequest.getEmail())
+			.firstName(registerRequest.getFristName())
+			.lastName(registerRequest.getLastName())
+			.dateOfBirth(registerRequest.getDateOfBirth())
+			.phoneNumber(registerRequest.getPhoneNumber())
+			.address(registerRequest.getAddress())
+			.role(registerRequest.getRole())
+			.build();
+			
+			User uer =  userDao.save(user);
+			
+			System.out.println(uer.toString());
+			
+			if(StringUtils.equals(user.getUsername(), registerRequest.getUserName())){
+				String token = jwtTokenService.generateToken(new HashMap<>(),user);
+				
+				System.out.println(token);
+				return AuthenticationResponse.builder()
+						.Token(token)
+						.build();
 			}
-			UserDetailsModel UserDetailsModelResponse = modelMapper.map(userResponse, UserDetailsModel.class);
-			return UserDetailsModelResponse;
+			throw new Exception("Exception while inserting data in DB");
 			
 		}catch (Exception e) {
-			throw new UserExcption("Model mapper excetion");
+			throw new UserExcption(e.getMessage());
 		}
 	}
 
 
 	@Override
-	public List<UserDetailsModel> getUserDetails() {
-		// TODO Auto-generated method stub
-		List<UserDetails>  userDetailsListResponse = userDao.findAll();
+	public List<User> getUserDetails() {
+		return userDao.findAll();
 		
-		return userDetailsListResponse.stream()
+		/*return userDetailsListResponse.stream()
 				.map(userResponse -> modelMapper.map(userResponse, UserDetailsModel.class))
-				.collect(Collectors.toList());
+				.collect(Collectors.toList());*/
 		
 		
 	}
 
 
 	@Override
-	public UserDetailsModel getUserById(int id) {
+	public User getUserById(int id) {
 		// TODO Auto-generated method stub
-		UserDetails userResponse = userDao.findById(id).get();
-		UserDetailsModel UserDetailsModelResponse = modelMapper.map(userResponse, UserDetailsModel.class);
-		return UserDetailsModelResponse;
+		return userDao.findById(id).get();
 		
 	}
+	
+	/*@Override
+	public UserDetailsService userDetailsService() {
+		
+		return userName -> userDao.findByUserName(userName).orElseThrow(()->new  UserNotFountException("User name not found"));
+		
+		return new UserDetailsS ervice() {
+			@Override
+			public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+				return userDao.findByUserName(username).orElseThrow(() -> new UserNotFountException("User Name not found"));
+			}
+		};
+	}*/
 	
 	
 

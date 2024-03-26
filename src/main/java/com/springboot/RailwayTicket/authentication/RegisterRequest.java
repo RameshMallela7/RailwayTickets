@@ -1,0 +1,28 @@
+package com.springboot.RailwayTicket.authentication;
+
+import com.springboot.RailwayTicket.utils.RolesEnum;
+
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.ToString;
+
+@Data@AllArgsConstructor
+@Builder
+@NoArgsConstructor
+@ToString
+public class RegisterRequest {
+
+	private String userName;
+	private String password;
+	private String email;
+	private String fristName;
+	private String lastName;
+	private String dateOfBirth;
+	private String phoneNumber;
+	private String address;
+	private RolesEnum role;
+	
+	
+}

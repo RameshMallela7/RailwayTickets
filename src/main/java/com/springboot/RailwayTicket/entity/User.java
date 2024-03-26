@@ -1,17 +1,43 @@
 package com.springboot.RailwayTicket.entity;
 
+import java.util.Collection;
+import java.util.List;
+
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.springboot.RailwayTicket.utils.RolesEnum;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.ToString;
 
-@Entity
-@Table(name = "UsersDetails")
 @Data
-public class User {
+@AllArgsConstructor
+@NoArgsConstructor
+@ToString
+@Builder
+@Entity
+@Table(name = "User")
+//@SecondaryTable(name = "UserProfile", pkJoinColumns = @PrimaryKeyJoinColumn(name = "userId" ))
+public class User implements UserDetails {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -5602011521100435243L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -23,4 +49,65 @@ public class User {
 	
 	@Column(name = "password")
 	private String password;
+	
+	@Column(name = "email")
+	private String email;
+	
+	@Column(name = "firstName")
+	private String firstName;
+	
+	@Column(name = "lastName")
+	private String lastName;
+	
+	@Column(name = "dateOfBirth")
+	private String dateOfBirth;
+	
+	@Column(name = "phoneNumber")
+	private String phoneNumber;
+	
+	@Column(name = "address")
+	private String address;
+	
+	@Column(name = "role")
+	@Enumerated(EnumType.STRING)
+	//@Enumerated(EnumType.ORDINAL) in DB it will store 0 (ADMIN),1(USER)
+	private RolesEnum role;
+
+	@Override
+	public Collection<? extends GrantedAuthority> getAuthorities() {
+		// TODO Auto-generated method stub
+		return List.of(new SimpleGrantedAuthority(role.name()));
+	}
+	@Override
+	public String getUsername() {
+		// TODO Auto-generated method stub
+		return userName;
+	}
+	@Override
+	public boolean isAccountNonExpired() {
+		// TODO Auto-generated method stub
+		return true;
+	}
+	@Override
+	public boolean isAccountNonLocked() {
+		// TODO Auto-generated method stub
+		return true;
+	}
+	@Override
+	public boolean isCredentialsNonExpired() {
+		// TODO Auto-generated method stub
+		return true;
+	}
+	@Override
+	public boolean isEnabled() {
+		// TODO Auto-generated method stub
+		return true;
+	}
+	
+	@Override
+	public String getPassword() {
+		return password;
+	}
+
+
 }

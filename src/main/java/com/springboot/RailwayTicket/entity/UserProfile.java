@@ -5,25 +5,30 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.OneToOne;
-import jakarta.persistence.PrimaryKeyJoinColumn;
 import jakarta.persistence.Table;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.ToString;
 
-@Entity
-@Table(name = "userprofile")
+
 @Data
+@ToString
+@NoArgsConstructor
+@AllArgsConstructor
+@Entity
+@Table(name = "UserProfile")
 public class UserProfile {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "userId")
 	private Long userId;
-	
-	@OneToOne
-	@PrimaryKeyJoinColumn(name= "userId")
-	private User user;
-	
+	/*
+	 * @OneToOne 
+	 * @PrimaryKeyJoinColumn(name= "userId") 
+	 * private UserLogin user;
+	 */
 	@Column(name = "firstName")
 	private String fristName;
 	
