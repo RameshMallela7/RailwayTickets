@@ -14,6 +14,7 @@ import org.springframework.security.web.authentication.WebAuthenticationDetailsS
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 
+import com.springboot.RailwayTicket.authentication.AuthenticationResponse;
 import com.springboot.RailwayTicket.service.JwtTokenService;
 import com.springboot.RailwayTicket.utils.RailwayTicketConstantValues;
 
@@ -46,6 +47,9 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter{  // OncePerRe
 	
 	@Autowired
 	private UserDetailsService userService;
+	
+	@Autowired
+	private AuthenticationResponse authenticationResponse;
 
 	@Override
 	protected void doFilterInternal(
@@ -58,6 +62,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter{  // OncePerRe
 		final String jwt;
 		final String userName;
 		
+		
 		System.out.println("JwtAuthenticationFilter -->authHeader   -> "+ authHeader);
 		
 		if(StringUtils.isEmpty(authHeader) || !StringUtils.startsWith(authHeader, "Bearer ")) {
@@ -68,6 +73,8 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter{  // OncePerRe
 		
 		jwt = authHeader.substring(7);
 		System.out.println("JwtAuthenticationFilter -->jwt -->  " + jwt);
+		authenticationResponse.setToken(jwt);
+		
 		userName = jwtTokenService.extractUserName(jwt);
 		System.out.println("JwtAuthenticationFilter -->userName -->  " + userName);
 		

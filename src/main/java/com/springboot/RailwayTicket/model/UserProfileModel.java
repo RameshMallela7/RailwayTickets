@@ -1,22 +1,22 @@
 package com.springboot.RailwayTicket.model;
 
-import com.springboot.RailwayTicket.utils.RolesEnum;
-
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.ToString;
 
+@Data
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
+public class UserProfileModel {
 
-public class UserProfileModelDummy {
-	
 	private Long userId;
-	private String fristName;
-	private String lastName;
-	private RolesEnum roles;
+	private String userName;
 	private String email;
+	private String firstName;
+	private String lastName;
 	private String dateOfBirth;
 	private String phoneNumber;
 	private String address;
-
 }

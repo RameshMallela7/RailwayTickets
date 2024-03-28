@@ -1,18 +1,13 @@
 package com.springboot.RailwayTicket.service;
 
-import java.util.HashMap;
 import java.util.List;
 
-import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import com.springboot.RailwayTicket.authentication.AuthenticationResponse;
-import com.springboot.RailwayTicket.authentication.RegisterRequest;
 import com.springboot.RailwayTicket.dao.UserDao;
 import com.springboot.RailwayTicket.entity.User;
-import com.springboot.RailwayTicket.excption.UserExcption;
 
 import jakarta.transaction.Transactional;
 
@@ -30,41 +25,6 @@ public class UserServiceImpl implements UserService {
 	public JwtTokenService jwtTokenService;
 
 	
-	@Override
-	public AuthenticationResponse createUser(RegisterRequest registerRequest) {
-		System.out.println("get data to service " + registerRequest.toString());
-		try {
-			User user = User.builder()
-			.userName(registerRequest.getUserName())
-			.password(encoder.encode(registerRequest.getPassword()))
-			.email(registerRequest.getEmail())
-			.firstName(registerRequest.getFristName())
-			.lastName(registerRequest.getLastName())
-			.dateOfBirth(registerRequest.getDateOfBirth())
-			.phoneNumber(registerRequest.getPhoneNumber())
-			.address(registerRequest.getAddress())
-			.role(registerRequest.getRole())
-			.build();
-			
-			User uer =  userDao.save(user);
-			
-			System.out.println(uer.toString());
-			
-			if(StringUtils.equals(user.getUsername(), registerRequest.getUserName())){
-				String token = jwtTokenService.generateToken(new HashMap<>(),user);
-				
-				System.out.println(token);
-				return AuthenticationResponse.builder()
-						.Token(token)
-						.build();
-			}
-			throw new Exception("Exception while inserting data in DB");
-			
-		}catch (Exception e) {
-			throw new UserExcption(e.getMessage());
-		}
-	}
-
 
 	@Override
 	public List<User> getUserDetails() {

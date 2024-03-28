@@ -11,13 +11,13 @@ import lombok.ToString;
 @ToString
 public class TrainModel {
 
-	public int trainId; //: Unique identifier for the train.
-	public String trainNumber; //: Train number (e.g., 12345).
-	public String trainName; //: Name of the train.
-	public String sourceStation; //: Source station for the train journey.
-	public String destinationStation; //: Destination station for the train journey.
-	public String departureTime; //: Departure time of the train.
-	public String arrivalTime; //: Arrival time of the train.
-	public String availableSeats; //: Number of available seats on the train.
+	public int trainId; 
+	public String trainNumber; 
+	public String trainName; 
+	public String sourceStation; 
+	public String destinationStation; 
+	public String departureTime; 
+	public String arrivalTime; 
+	public String availableSeats; 
 
 }

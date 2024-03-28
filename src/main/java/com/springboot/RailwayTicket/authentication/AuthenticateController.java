@@ -1,7 +1,6 @@
 package com.springboot.RailwayTicket.authentication;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -11,7 +10,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.springboot.RailwayTicket.service.AuthenticationService;
-import com.springboot.RailwayTicket.service.UserService;
 
 import lombok.RequiredArgsConstructor;
 
@@ -20,12 +18,6 @@ import lombok.RequiredArgsConstructor;
 @RequestMapping("/api/auth")
 @RequiredArgsConstructor
 public class AuthenticateController {
-	
-	@Value("${jwt.header}")
-	private String tokenHeader;
-	
-	@Autowired
-	private UserService userService;
 	
 	@Autowired
 	private AuthenticationService authenticationService;
@@ -37,7 +29,7 @@ public class AuthenticateController {
 	
 	@PostMapping("/registration")   //  Add User details
 	public ResponseEntity<AuthenticationResponse> createUser(@RequestBody RegisterRequest registerRequest){
-		return ResponseEntity.ok(userService.createUser(registerRequest));
+		return ResponseEntity.ok(authenticationService.createUser(registerRequest));
 	}
 	
 	

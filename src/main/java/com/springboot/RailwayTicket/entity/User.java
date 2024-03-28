@@ -7,7 +7,6 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.springboot.RailwayTicket.utils.RolesEnum;
 
 import jakarta.persistence.Column;
@@ -72,6 +71,10 @@ public class User implements UserDetails {
 	@Enumerated(EnumType.STRING)
 	//@Enumerated(EnumType.ORDINAL) in DB it will store 0 (ADMIN),1(USER)
 	private RolesEnum role;
+	
+	//@OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
+	//@JoinColumn(name = "bookingId", nullable = false, insertable = false, updatable = false)
+	//private List<Booking> bookings;
 
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {

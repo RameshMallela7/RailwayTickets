@@ -1,42 +1,49 @@
 package com.springboot.RailwayTicket.entity;
 
+import java.util.List;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 
-
 @Data
-@ToString
-@NoArgsConstructor
 @AllArgsConstructor
+@NoArgsConstructor
+@ToString
+@Builder
 @Entity
 @Table(name = "UserProfile")
 public class UserProfile {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "userId")
+	@Column(name = "id")
 	private Long userId;
-	/*
-	 * @OneToOne 
-	 * @PrimaryKeyJoinColumn(name= "userId") 
-	 * private UserLogin user;
-	 */
-	@Column(name = "firstName")
-	private String fristName;
 	
-	@Column(name = "lastName")
-	private String lastName;
+	@Column(name = "userName")
+	private String userName;
 	
 	@Column(name = "email")
 	private String email;
+	
+	@Column(name = "firstName")
+	private String firstName;
+	
+	@Column(name = "lastName")
+	private String lastName;
 	
 	@Column(name = "dateOfBirth")
 	private String dateOfBirth;
@@ -46,4 +53,10 @@ public class UserProfile {
 	
 	@Column(name = "address")
 	private String address;
+	
+	/*@OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
+	@JoinColumn(name = "fk_bookingId", nullable = false, insertable = false, updatable = false)
+	@JsonIgnoreProperties
+	private List<Booking> bookings; */
+	
 }
