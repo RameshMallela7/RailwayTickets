@@ -93,6 +93,8 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter{  // OncePerRe
 				
 				
 				SecurityContextHolder.getContext().setAuthentication(usernamePasswordAuthenticationToken);
+				
+				System.out.println("12345");
 			}
 		}
 		

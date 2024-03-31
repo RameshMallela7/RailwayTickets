@@ -1,5 +1,10 @@
 package com.springboot.RailwayTicket.service;
 
+import java.time.format.DateTimeFormatter;
+import java.util.List;
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
+
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -19,11 +24,22 @@ public class TrainServiceImpl implements TrainService {
 	
 	@Autowired
 	private ModelMapper modelMapper;
+	
+	DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
 
 	@Override
 	public void addNewTrainDetails(TrainModel trainModel) {
 		
-		trainDao.save(modelMapper.map(trainModel, Train.class));
+		Train train = modelMapper.map(trainModel, Train.class);
+		//train.setDepartureTime(train.getDepartureTime().);
+		trainDao.save(train);
 	}
+	
+	
+	@Override
+	public void addAllNewTrainDetails(List<TrainModel> listOfTrains) {
+		trainDao.saveAll(listOfTrains.stream().map(train -> modelMapper.map(train, Train.class)).collect(Collectors.toList()));
+	}
+	
 
 }

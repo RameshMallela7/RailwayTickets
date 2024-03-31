@@ -1,7 +1,10 @@
 package com.springboot.RailwayTicket.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -21,17 +24,26 @@ public class RailwayAdminController{
 	private TrainService trainService;
 
 	@GetMapping("/login/getAdminProfile")
-	//@PreAuthorize(value = "hasAuthority('ADMIN')")
+	@PreAuthorize(value = "hasAuthority('ADMIN')")
 	public String getAdminById() {
 		return "ADMIN --> /login/getAdminProfile";
 	}
 	
 	
-	@PostMapping("/addNewTrain")   
+	@PostMapping("/addNewTrain")
+	@PreAuthorize("hasAnyRole('ADMIN')")
 	public ResponseEntity<String> addNewTrain(@RequestBody TrainModel trainModel){
 		System.out.println(trainModel.toString());
 		trainService.addNewTrainDetails(trainModel);
-		return ResponseEntity.ok("Train details added");
+		return ResponseEntity.ok("Train detail added");
+	}
+	
+	@PostMapping("/addAllNewTrains")  
+	@PreAuthorize("hasAnyRole('ADMIN')")
+	public ResponseEntity<String> addNewTrain(@RequestBody List<TrainModel> listTrainModel){
+		System.out.println(listTrainModel.toString());
+		trainService.addAllNewTrainDetails(listTrainModel);
+		return ResponseEntity.ok("All Train details added");
 	}
 	 
 	

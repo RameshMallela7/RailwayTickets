@@ -1,6 +1,8 @@
 package com.springboot.RailwayTicket.authentication;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -10,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.springboot.RailwayTicket.service.AuthenticationService;
+import com.sun.net.httpserver.HttpsServer;
 
 import lombok.RequiredArgsConstructor;
 
@@ -28,8 +31,14 @@ public class AuthenticateController {
 	}
 	
 	@PostMapping("/registration")   //  Add User details
-	public ResponseEntity<AuthenticationResponse> createUser(@RequestBody RegisterRequest registerRequest){
-		return ResponseEntity.ok(authenticationService.createUser(registerRequest));
+	public ResponseEntity<String> createUser(@RequestBody RegisterRequest registerRequest){
+		
+		if(authenticationService.userNameIsPresent(registerRequest.getUserName())) {
+			return new ResponseEntity<String>("User name already exists", HttpStatus.CONFLICT);
+		}
+		
+		AuthenticationResponse authenticationResponse = authenticationService.createUser(registerRequest);
+		return new ResponseEntity<String>(authenticationResponse.toString(),HttpStatus.ACCEPTED);
 	}
 	
 	

@@ -1,6 +1,6 @@
 package com.springboot.RailwayTicket.entity;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
@@ -10,7 +10,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -32,18 +32,24 @@ public class Booking {
 	@Column(name = "bookingId")
 	public int bookingId;
 	
-	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	@JoinColumn(name = "userId")
 	public UserProfile userProfile;
 	
+	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	@JoinColumn(name = "trainId")
+	private Train train;
 	
-	//public int ticketId;
+	@Column(name= "bookingDate") 
+	public LocalDate bookingDate;
 	
-	@Column(name= "bookingDate")
-	public Date bookingDate;
-	
-	@Column(name = "status")
-	public String status;
+	// ********** Each booking can have one tickets, ******************
+	//**** BI-DIRECTIONAL  relationship ****
+	//Owner
+	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	@JoinColumn(name = "ticketId")
+	public Ticket ticket;
+
 	
 	
 

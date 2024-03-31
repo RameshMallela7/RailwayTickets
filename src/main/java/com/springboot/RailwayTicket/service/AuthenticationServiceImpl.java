@@ -41,6 +41,11 @@ public class AuthenticationServiceImpl implements AuthenticationService {
 	private UserProfileDao userProfileDao;
 	
 	@Override
+	public boolean userNameIsPresent(String userName) {
+		return userProfileDao.findByUserName(userName).isPresent();
+	}
+	
+	@Override
 	public AuthenticationResponse createUser(RegisterRequest registerRequest) {
 		System.out.println("get data to service " + registerRequest.toString());
 		try {

@@ -1,6 +1,7 @@
 package com.springboot.RailwayTicket.model;
 
-import java.util.Date;
+import java.time.LocalDate;
+import java.time.LocalTime;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -18,10 +19,9 @@ public class TicketModel {
 	public int userId; //; //: Identifier for the user who booked the ticket.
 	public String sourceStation; //: Source station for the journey.
 	public String destinationStation; //: Destination station for the journey.
-	public Date departureTime; //: Departure time of the train.
-	public String arrivalTime; //: Arrival time of the train.
-	public Date bookingDate; //: Date when the ticket was booked.
-	public String seatNumber ;
+	public LocalTime departureTime; //: Departure time of the train.
+	public LocalTime arrivalTime; //: Arrival time of the train.
+	public LocalDate bookingDate; //: Date when the ticket was booked.
 
 
 }

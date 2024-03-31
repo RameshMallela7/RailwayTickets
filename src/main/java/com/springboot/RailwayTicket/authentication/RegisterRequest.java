@@ -1,5 +1,7 @@
 package com.springboot.RailwayTicket.authentication;
 
+import java.time.LocalDate;
+
 import com.springboot.RailwayTicket.utils.RolesEnum;
 
 import lombok.AllArgsConstructor;
@@ -19,7 +21,7 @@ public class RegisterRequest {
 	private String email;
 	private String firstName;
 	private String lastName;
-	private String dateOfBirth;
+	private LocalDate dateOfBirth;
 	private String phoneNumber;
 	private String address;
 	private RolesEnum role;

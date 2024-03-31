@@ -1,5 +1,7 @@
 package com.springboot.RailwayTicket.model;
 
+import java.time.LocalTime;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -16,8 +18,8 @@ public class TrainModel {
 	public String trainName; 
 	public String sourceStation; 
 	public String destinationStation; 
-	public String departureTime; 
-	public String arrivalTime; 
-	public String availableSeats; 
+	public LocalTime departureTime; 
+	public LocalTime arrivalTime; 
+	public Integer availableSeats; 
 
 }

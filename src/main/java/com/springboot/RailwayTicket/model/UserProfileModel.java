@@ -1,5 +1,7 @@
 package com.springboot.RailwayTicket.model;
 
+import java.time.LocalDate;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -16,7 +18,7 @@ public class UserProfileModel {
 	private String email;
 	private String firstName;
 	private String lastName;
-	private String dateOfBirth;
+	private LocalDate dateOfBirth;
 	private String phoneNumber;
 	private String address;
 }

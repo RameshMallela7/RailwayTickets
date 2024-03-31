@@ -1,0 +1,313 @@
+{
+	"info": {
+		"_postman_id": "951cc684-57e5-48cb-ab79-e30f8eee13a6",
+		"name": "Railway Tickets",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "16560487"
+	},
+	"item": [
+		{
+			"name": "Authenticate",
+			"item": [
+				{
+					"name": "Welcome",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/auth/welcome",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"auth",
+								"welcome"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Registration",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\t\"userName\": \"sham200\",\r\n\t\"password\":\"sham\",\r\n\t\"email\":\"sham@gmail.com\",\r\n\t\"firstName\": \"Sham\",\r\n\t\"lastName\":\"Kumar\",\r\n\t\"dateOfBirth\":\"28-02-1995\",\r\n\t\"phoneNumber\":8106110252,\r\n\t\"address\": \"abc address\",\r\n    \"role\":\"USER\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/auth/registration",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"auth",
+								"registration"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\" : \"ramesh500\",\r\n    \"password\" : \"ram\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/auth/login",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"auth",
+								"login"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Add_Train_Details ADMIN",
+			"item": [
+				{
+					"name": "Test ADMIN",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{ADMIN-Token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/admin/login/getAdminProfile",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"admin",
+								"login",
+								"getAdminProfile"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "addNewTrain",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{ADMIN-Token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"trainNumber\":\"12700\",\r\n    \"trainName\":\"Vande Barath\",\r\n    \"sourceStation\":\"Vijayavada\",\r\n    \"destinationStation\":\"Chennai\",\r\n    \"departureTime\":\"06:30\",\r\n    \"arrivalTime\":\"14:00\",\r\n    \"availableSeats\":\"100\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/admin/addNewTrain",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"admin",
+								"addNewTrain"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "AddAllTrains",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{ADMIN-Token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "[\r\n    {\r\n    \"trainNumber\":\"12985\",\r\n    \"trainName\":\"Hyderabad Express\",\r\n    \"sourceStation\":\"Hyderabad\",\r\n    \"destinationStation\":\"Chennai\",\r\n    \"departureTime\":\"19:30\",\r\n    \"arrivalTime\":\"05:00\",\r\n    \"availableSeats\":\"100\"\r\n},{\r\n    \"trainNumber\":\"12288\",\r\n    \"trainName\":\"Chennai Express\",\r\n    \"sourceStation\":\"Chennai\",\r\n    \"destinationStation\":\"Hyderbad\",\r\n    \"departureTime\":\"06:30\",\r\n    \"arrivalTime\":\"18:30\",\r\n    \"availableSeats\":\"80\"\r\n},{\r\n    \"trainNumber\":\"12700\",\r\n    \"trainName\":\"Vande Barath\",\r\n    \"sourceStation\":\"Vijayavada\",\r\n    \"destinationStation\":\"Chennai\",\r\n    \"departureTime\":\"06:30\",\r\n    \"arrivalTime\":\"14:00\",\r\n    \"availableSeats\":\"100\"\r\n}\r\n]",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/admin/addAllNewTrains",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"admin",
+								"addAllNewTrains"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Ticket_Booking  USER",
+			"item": [
+				{
+					"name": "Test USER",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJwdW5lZXRoMjAwIiwiaWF0IjoxNzExNjM5ODkwLCJleHAiOjE3MTE2NDEzMzB9._6rQXBf6MkL5W9yrC8m6mUq96lsbGachn6De4Hj6Kl0",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/user/login/getuserProfile",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"user",
+								"login",
+								"getuserProfile"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "fetch_Trains",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				},
+				{
+					"name": "doBooking",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{USER-Token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"passenger\":[\r\n        {\r\n            \"name\":\"King\",\r\n            \"age\":\"20\"\r\n        },{\r\n            \"name\":\"Queen\",\r\n            \"age\":\"18\"\r\n        },{\r\n            \"name\":\"Barr\",\r\n            \"age\":\"38\"\r\n        }\r\n    ],\r\n    \"train\":{\r\n        \"trainId\": 2,\r\n        \"trainNumber\": \"12985\",\r\n        \"trainName\": \"Hyderabad Express\",\r\n        \"sourceStation\": \"Hyderabad\",\r\n        \"destinationStation\": \"Chennai\",\r\n        \"departureTime\": \"19:30:00\",\r\n        \"arrivalTime\": \"05:00:00\",\r\n        \"availableSeats\": 100\r\n    },\r\n    \"bookingDate\":\"2024-04-25\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/railway/doBooking",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"railway",
+								"doBooking"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

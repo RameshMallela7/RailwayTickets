@@ -1,5 +1,6 @@
 package com.springboot.RailwayTicket.entity;
 
+import java.time.LocalDate;
 import java.util.Collection;
 import java.util.List;
 
@@ -59,7 +60,7 @@ public class User implements UserDetails {
 	private String lastName;
 	
 	@Column(name = "dateOfBirth")
-	private String dateOfBirth;
+	private LocalDate dateOfBirth;
 	
 	@Column(name = "phoneNumber")
 	private String phoneNumber;

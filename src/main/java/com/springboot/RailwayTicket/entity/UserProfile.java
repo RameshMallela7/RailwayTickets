@@ -1,5 +1,6 @@
 package com.springboot.RailwayTicket.entity;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -46,7 +47,7 @@ public class UserProfile {
 	private String lastName;
 	
 	@Column(name = "dateOfBirth")
-	private String dateOfBirth;
+	private LocalDate dateOfBirth;
 	
 	@Column(name = "phoneNumber")
 	private String phoneNumber;

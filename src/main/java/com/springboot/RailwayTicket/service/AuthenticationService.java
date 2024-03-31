@@ -13,4 +13,6 @@ public interface AuthenticationService {
 
 	AuthenticationResponse createUser(RegisterRequest registerRequest);
 
+	boolean userNameIsPresent(String userName);
+
 }
