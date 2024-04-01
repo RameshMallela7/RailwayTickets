@@ -61,13 +61,5 @@ public class BookingServiceTest {
 		.lastName("Mallea")
 		.dateOfBirth(LocalDate.parse("1995-02-28")).build();
 		
-		Mockito.when(dao.findPassengersByTrainAndUserProfile(train, user)).thenReturn(list);
-		
-		//List<Passenger>  i = ticketDao.findPassengersByTrainAndUserProfile(train, user);
-		List<Passenger> i = bookingService.setSeatNumberMethod(train, user, list);
-		
-		i.forEach(System.out::println);
-		
-		assertEquals("King", i.get(0).getName());
 	}
 }

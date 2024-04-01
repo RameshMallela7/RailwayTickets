@@ -21,10 +21,10 @@ import lombok.ToString;
 @Builder
 public class BookingModel {
 	
-	public int bookingId;
+	public Long bookingId;
 	public UserProfile userProfile;
-	private Train train;
-	private List<Passenger> passenger;
+	//private Train train;
+	//private List<Passenger> passenger;
 	public Ticket ticket;
 	public LocalDate bookingDate;
 	public String status;

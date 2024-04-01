@@ -17,6 +17,7 @@ public interface TicketDao extends JpaRepository<Ticket, Integer> {
 
 	public Ticket findByTrain(Train train);
 	
-	@Query("SELECT t.passengers from Ticket t where t.train = :train and t.userProfile = :userProfile ")
-	public List<Passenger> findPassengersByTrainAndUserProfile(@Param("train") Train train, @Param("userProfile") UserProfile userProfile);
+	//Derived query
+	@Query("SELECT t.passengers from Ticket t where t.train = :train")
+	public List<Passenger> findPassengersByTrain(@Param("train") Train train);
 }

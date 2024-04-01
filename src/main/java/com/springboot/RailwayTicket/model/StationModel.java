@@ -13,7 +13,7 @@ import lombok.ToString;
 @ToString
 public class StationModel {
 	
-	public int stationId;
+	public Long stationId;
 	public int stationCode;
 	public String stationName;
 	public String location;

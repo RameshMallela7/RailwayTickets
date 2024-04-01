@@ -52,7 +52,40 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n\t\"userName\": \"sham200\",\r\n\t\"password\":\"sham\",\r\n\t\"email\":\"sham@gmail.com\",\r\n\t\"firstName\": \"Sham\",\r\n\t\"lastName\":\"Kumar\",\r\n\t\"dateOfBirth\":\"28-02-1995\",\r\n\t\"phoneNumber\":8106110252,\r\n\t\"address\": \"abc address\",\r\n    \"role\":\"USER\"\r\n}",
+							"raw": "{\r\n\t\"userName\": \"Sham200\",\r\n\t\"password\":\"sham\",\r\n\t\"email\":\"shamh@gmail.com\",\r\n\t\"firstName\": \"Sham\",\r\n\t\"lastName\":\"Kumar\",\r\n\t\"dateOfBirth\":\"1995-02-28\",\r\n\t\"phoneNumber\":8106110252,\r\n\t\"address\": \"xyz address\",\r\n    \"role\":\"ADMIN\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/auth/registration",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"auth",
+								"registration"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Registration USER",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\t\"userName\": \"ramesh500\",\r\n\t\"password\":\"ram\",\r\n\t\"email\":\"ramesh@gmail.com\",\r\n\t\"firstName\": \"Ramesh\",\r\n\t\"lastName\":\"Mallela\",\r\n\t\"dateOfBirth\":\"1995-02-28\",\r\n\t\"phoneNumber\":8106110200,\r\n\t\"address\": \"xyz address\",\r\n    \"role\":\"USER\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -268,7 +301,7 @@
 					"response": []
 				},
 				{
-					"name": "doBooking",
+					"name": "doBooking_1",
 					"request": {
 						"auth": {
 							"type": "bearer",
@@ -284,7 +317,47 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"passenger\":[\r\n        {\r\n            \"name\":\"King\",\r\n            \"age\":\"20\"\r\n        },{\r\n            \"name\":\"Queen\",\r\n            \"age\":\"18\"\r\n        },{\r\n            \"name\":\"Barr\",\r\n            \"age\":\"38\"\r\n        }\r\n    ],\r\n    \"train\":{\r\n        \"trainId\": 2,\r\n        \"trainNumber\": \"12985\",\r\n        \"trainName\": \"Hyderabad Express\",\r\n        \"sourceStation\": \"Hyderabad\",\r\n        \"destinationStation\": \"Chennai\",\r\n        \"departureTime\": \"19:30:00\",\r\n        \"arrivalTime\": \"05:00:00\",\r\n        \"availableSeats\": 100\r\n    },\r\n    \"bookingDate\":\"2024-04-25\"\r\n}",
+							"raw": "{\r\n    \"passenger\":[\r\n        {\r\n            \"name\":\"King\",\r\n            \"age\":\"29\"\r\n        },{\r\n            \"name\":\"Queen\",\r\n            \"age\":\"30\"\r\n        },{\r\n            \"name\":\"Barb\",\r\n            \"age\":\"40\"\r\n        }\r\n    ],\r\n    \"train\":{\r\n        \"trainId\": 2,\r\n        \"trainNumber\": \"12985\",\r\n        \"trainName\": \"Hyderabad Express\",\r\n        \"sourceStation\": \"Hyderabad\",\r\n        \"destinationStation\": \"Chennai\",\r\n        \"departureTime\": \"19:30:00\",\r\n        \"arrivalTime\": \"05:00:00\",\r\n        \"availableSeats\": 100\r\n    },\r\n    \"bookingDate\":\"2024-04-25\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/railway/doBooking",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"railway",
+								"doBooking"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "doBooking_2",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{USER-Token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"passenger\":[\r\n        {\r\n            \"name\":\"Raju\",\r\n            \"age\":\"20\"\r\n        },{\r\n            \"name\":\"Rani\",\r\n            \"age\":\"18\"\r\n        },{\r\n            \"name\":\"Batudu\",\r\n            \"age\":\"38\"\r\n        }\r\n    ],\r\n    \"train\":{\r\n        \"trainId\": 2,\r\n        \"trainNumber\": \"12985\",\r\n        \"trainName\": \"Hyderabad Express\",\r\n        \"sourceStation\": \"Hyderabad\",\r\n        \"destinationStation\": \"Chennai\",\r\n        \"departureTime\": \"19:30:00\",\r\n        \"arrivalTime\": \"05:00:00\",\r\n        \"availableSeats\": 100\r\n    },\r\n    \"bookingDate\":\"2024-09-30\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"

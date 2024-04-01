@@ -10,6 +10,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
@@ -21,24 +22,25 @@ import lombok.ToString;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@ToString
+@ToString(exclude = "ticket")
 @Builder
 @Entity
-@Table(name = "Booking")
+@Table(name = "Booking") //Parent Table
 public class Booking {
 	
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "bookingId")
-	public int bookingId;
+	public Long bookingId;
 	
+	//Owner
 	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-	@JoinColumn(name = "userId")
+	@JoinColumn(name = "fk_userId")
 	public UserProfile userProfile;
 	
-	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-	@JoinColumn(name = "trainId")
-	private Train train;
+	//@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	//@JoinColumn(name = "fk_trainId")
+	//private Train train;
 	
 	@Column(name= "bookingDate") 
 	public LocalDate bookingDate;
@@ -47,7 +49,7 @@ public class Booking {
 	//**** BI-DIRECTIONAL  relationship ****
 	//Owner
 	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-	@JoinColumn(name = "ticketId")
+	@JoinColumn(name = "fk_ticketId")
 	public Ticket ticket;
 
 	

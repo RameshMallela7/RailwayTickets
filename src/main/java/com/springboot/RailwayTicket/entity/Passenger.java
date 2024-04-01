@@ -1,11 +1,11 @@
 package com.springboot.RailwayTicket.entity;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
@@ -20,13 +20,13 @@ import lombok.ToString;
 @ToString
 @Builder
 @Entity
-@Table(name = "Passenger")
+@Table(name = "Passenger") // child table for Ticket
 public class Passenger {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "passengerId")
-	public int passengerId;
+	public Long passengerId;
 	
 	@Column(name = "name")
 	private String name;
@@ -40,9 +40,9 @@ public class Passenger {
 	//Owner type
 	//Many passenger can have in one ticket
 	//Bi-directional relationship
-	@ManyToOne
-	@JoinColumn(name = "ticket_id")
-	private Ticket ticket;
+	//@JoinColumn(name = "ticket_id")
+	//@ManyToOne(cascade = CascadeType.ALL)
+	//private Ticket ticket;
 	 
 	
 }

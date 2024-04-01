@@ -13,7 +13,7 @@ import lombok.ToString;
 @ToString
 public class TrainModel {
 
-	public int trainId; 
+	public Integer trainId; 
 	public String trainNumber; 
 	public String trainName; 
 	public String sourceStation; 
