@@ -1,6 +1,7 @@
 package com.springboot.RailwayTicket.entity;
 
 import java.time.LocalDate;
+import java.util.List;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
@@ -9,7 +10,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
-import jakarta.persistence.OneToOne;
+import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -20,20 +21,21 @@ import lombok.ToString;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@ToString(exclude = "ticket") // Exclude the 'booking' field from toString()
+//@ToString(exclude = "ticket") // Exclude the 'booking' field from toString()
 @Builder
 @Entity
 @Table(name = "UserProfile")
 public class UserProfile {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.AUTO, generator = "userProfile_gen")
+	@SequenceGenerator(name = "userProfile_gen", sequenceName = "userProfile_seq",
+						initialValue = 1, allocationSize = 1)
 	@Column(name = "id", updatable = false)
 	private Long userId;
 	
 	@Column(name = "userName", 
 			nullable = false, 
-			unique = true, 
 			updatable = false)
 	private String userName;
 	
@@ -59,8 +61,11 @@ public class UserProfile {
 	
 	//refference type
 	//Bi-directional relationship
-	//@OneToOne(mappedBy = "userProfile", cascade = CascadeType.ALL)
-	//private Ticket ticket;
+	//@OneToMany(mappedBy = "userProfile", cascade = CascadeType.ALL)
+	//private List<Booking> bookings;
+
+
+	
 	
 	//refference type
 	//Bi-directional relationship
@@ -71,5 +76,7 @@ public class UserProfile {
 	@JoinColumn(name = "fk_bookingId", nullable = false, insertable = false, updatable = false)
 	@JsonIgnoreProperties
 	private List<Booking> bookings; */
+	
+	
 	
 }

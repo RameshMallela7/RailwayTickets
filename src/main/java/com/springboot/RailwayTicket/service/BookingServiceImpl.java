@@ -8,6 +8,7 @@ import java.util.stream.IntStream;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import com.springboot.RailwayTicket.dao.BookingDao;
@@ -79,7 +80,6 @@ public class BookingServiceImpl implements BookingService {
 			
 			List<Passenger> passengerList = setSeatNumberMethod(
 					bookingRequestModel.getTrain(),
-					currentUserProfile,
 					bookingRequestModel.getPassenger());
 			passengerList.forEach(n ->{
 				System.out.println("BookingServiceImpl -- doBooking_1 - passengerList > "+n);
@@ -105,7 +105,7 @@ public class BookingServiceImpl implements BookingService {
 					.passengers(passengerList)
 					.build(); 
 			
-			Ticket tik =  ticketDao.save(ticket);
+			//Ticket tik =  ticketDao.save(ticket);
 			
 			/*passengerList.stream().forEach(n -> {
 				//n.setTicket(ticket);
@@ -119,7 +119,7 @@ public class BookingServiceImpl implements BookingService {
 					.userProfile(currentUserProfile)
 					//.train(trainGetById)
 					.bookingDate(bookingRequestModel.getBookingDate())
-					.ticket(tik)
+					.ticket(ticket)
 					.build();
 			
 			Booking bookingResponse = bookingDao.save(bookingDetails);
@@ -139,12 +139,11 @@ public class BookingServiceImpl implements BookingService {
 		
 	}
 
-	public List<Passenger> setSeatNumberMethod(
+	private List<Passenger> setSeatNumberMethod(
 			Train train, 
-			UserProfile userprofile , 
 			List<Passenger> passengers) {
 
-		//get passengers list with train details
+		//get passengers list with train details if any ticket is booked for that train previously
 		List<Passenger> resultPass =  ticketDao.findPassengersByTrain(train);
 		
 		System.out.println("BookingServiceImpl - setSeatNumberMethod  - resultPass > ");
@@ -153,7 +152,9 @@ public class BookingServiceImpl implements BookingService {
 		//Incrementing seat numbers on basses of getting list of passengers with seatnumbers
 		/*
 		  already that train has 3 passengers > ticketDao.findPassengersByTrain
-		  new passengers which came as input to this method will be starts with 4,5,6,..
+		  new passengers which came as input to this method which will be resulted with 4,5,6,..
+		
+		  IntStream.range(0, passengers.size()) => no. of iterations
 		 */
 		
 	return	IntStream.range(0, passengers.size()).mapToObj(index -> {
@@ -161,9 +162,9 @@ public class BookingServiceImpl implements BookingService {
 				Integer maxSeatNumber = 1;
 				
 				if(resultPass.size() > 0) {
-					// will get maxSeatNumber  -> 3
+					// will get maxSeatNumber from resultPass -> 3
 					maxSeatNumber = resultPass.stream().max(Comparator.comparing(Passenger::getSeatNumber)).get().getSeatNumber();
-					maxSeatNumber= maxSeatNumber+1;
+					maxSeatNumber++;
 				}
 				
 				pass.setSeatNumber(maxSeatNumber+index);

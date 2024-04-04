@@ -17,6 +17,7 @@ import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -27,7 +28,7 @@ import lombok.ToString;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@ToString
+//@ToString
 @Builder
 @Entity
 @Table(name = "User")
@@ -40,7 +41,9 @@ public class User implements UserDetails {
 	private static final long serialVersionUID = -5602011521100435243L;
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.AUTO, generator = "user_gen")
+	@SequenceGenerator(name = "user_gen", sequenceName = "user_seq",
+						initialValue = 1, allocationSize = 1)
 	@Column(name = "id", updatable = false)
 	private Long userId;
 	
@@ -78,6 +81,8 @@ public class User implements UserDetails {
 	@Enumerated(EnumType.STRING)
 	//@Enumerated(EnumType.ORDINAL) in DB it will store 0 (ADMIN),1(USER)
 	private RolesEnum role;
+	
+	
 	
 	//@OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
 	//@JoinColumn(name = "bookingId", nullable = false, insertable = false, updatable = false)
@@ -118,6 +123,7 @@ public class User implements UserDetails {
 	public String getPassword() {
 		return password;
 	}
+	
 
 
 }

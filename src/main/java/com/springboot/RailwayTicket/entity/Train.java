@@ -13,6 +13,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
+import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -30,7 +31,9 @@ import lombok.ToString;
 public class Train {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.AUTO, generator = "train_gen")
+	@SequenceGenerator(name = "train_gen", sequenceName = "train_seq",
+						initialValue = 1, allocationSize = 1)
 	@Column(name= "trainId")
 	public Integer trainId; //: Unique identifier for the train.
 	

@@ -24,7 +24,7 @@ import lombok.ToString;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@ToString(exclude = "UserProfile") 
+//@ToString(exclude = "UserProfile") 
 @Builder
 @Entity
 @Table(name = "Ticket")
@@ -62,5 +62,5 @@ public class Ticket {
 	//@OneToOne(mappedBy = "ticket",  cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	//public Booking booking;	
 	
-
+	
 }

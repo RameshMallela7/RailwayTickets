@@ -20,9 +20,5 @@ public interface BookingService {
 
 	public BookingModel doBooking_1(BookingRequestModel bookingRequestModel) throws Exception;
 	
-	public List<Passenger> setSeatNumberMethod(
-			Train train, 
-			UserProfile userprofile , 
-			List<Passenger> passengers);
-
+	
 }
