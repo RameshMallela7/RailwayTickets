@@ -17,9 +17,12 @@ import com.springboot.RailwayTicket.model.BookingRequestModel;
 import com.springboot.RailwayTicket.model.TrainModel;
 import com.springboot.RailwayTicket.service.BookingService;
 
+import lombok.extern.slf4j.Slf4j;
+
 @RestController
 @CrossOrigin
 @RequestMapping("/api/railway")
+@Slf4j
 public class RailwayController {
 
 	@Autowired
@@ -28,10 +31,9 @@ public class RailwayController {
 	
 	@GetMapping("/fetchTrains")
 	@PreAuthorize("hasAnyRole('USER', 'ADMIN')")
-	public ResponseEntity<List<TrainModel>> fetchTrains(@RequestBody TrainModel trainRequest) {
-		System.out.println("Enter fetchTrains "+ trainRequest.getSourceStation() + trainRequest.getSourceStation());
+	public ResponseEntity<List<TrainModel>> fetchTrains(@RequestBody TrainModel trainRequest) throws Exception{
+		log.info("Enter fetchTrains "+ trainRequest.getSourceStation() + trainRequest.getDestinationStation());
 		List<TrainModel> trailsList = bookingService.fetchTrains(trainRequest);
-		
 		return ResponseEntity.ok(trailsList);
 	}
 	
@@ -39,8 +41,8 @@ public class RailwayController {
 	@PostMapping("/doBooking")   
 	@PreAuthorize("hasAnyRole('USER', 'ADMIN')")
 	public ResponseEntity<BookingModel> doBooking(@RequestBody BookingRequestModel bookingRequestModel) throws Exception{
-		System.out.println(bookingRequestModel.toString());
-		BookingModel bookingModelResponse =bookingService.doBooking_1(bookingRequestModel);
+		log.info(bookingRequestModel.toString());
+		BookingModel bookingModelResponse =bookingService.doBooking(bookingRequestModel);
 		return ResponseEntity.ok(bookingModelResponse);
 	}
 	

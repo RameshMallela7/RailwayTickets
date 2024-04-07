@@ -15,9 +15,12 @@ import org.springframework.web.bind.annotation.RestController;
 import com.springboot.RailwayTicket.model.TrainModel;
 import com.springboot.RailwayTicket.service.TrainService;
 
+import lombok.extern.slf4j.Slf4j;
+
 @RestController
 @CrossOrigin
 @RequestMapping("/api/admin")
+@Slf4j
 public class RailwayAdminController{
 	
 	@Autowired
@@ -33,7 +36,7 @@ public class RailwayAdminController{
 	@PostMapping("/addNewTrain")
 	@PreAuthorize("hasAnyRole('ADMIN')")
 	public ResponseEntity<String> addNewTrain(@RequestBody TrainModel trainModel){
-		System.out.println(trainModel.toString());
+		log.info(trainModel.toString());
 		trainService.addNewTrainDetails(trainModel);
 		return ResponseEntity.ok("Train detail added");
 	}
@@ -41,7 +44,7 @@ public class RailwayAdminController{
 	@PostMapping("/addAllNewTrains")  
 	@PreAuthorize("hasAnyRole('ADMIN')")
 	public ResponseEntity<String> addNewTrain(@RequestBody List<TrainModel> listTrainModel){
-		System.out.println(listTrainModel.toString());
+		log.info(listTrainModel.toString());
 		trainService.addAllNewTrainDetails(listTrainModel);
 		return ResponseEntity.ok("All Train details added");
 	}

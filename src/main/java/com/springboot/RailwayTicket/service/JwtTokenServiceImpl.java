@@ -1,4 +1,4 @@
-package com.springboot.RailwayTicket.service;
+	package com.springboot.RailwayTicket.service;
 
 import java.security.Key;
 import java.util.Date;
@@ -16,6 +16,8 @@ import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
+import jakarta.transaction.Transactional;
+import lombok.extern.slf4j.Slf4j;
 
 /*
  * To Validate token
@@ -24,6 +26,8 @@ import io.jsonwebtoken.security.Keys;
   * 
  */
 @Service
+@Transactional
+@Slf4j
 public class JwtTokenServiceImpl implements JwtTokenService {
 	
 	@Value("${jwt.expiration}")
@@ -41,7 +45,7 @@ public class JwtTokenServiceImpl implements JwtTokenService {
 	
 	@Override
 	public String generateToken(Map<String, Object> extraClaim, UserDetails userDetails) {
-		System.out.println("generateToken -> "+userDetails.getUsername());
+		log.info("generateToken -> "+userDetails.getUsername());
 		return Jwts.builder()
 				.setClaims(extraClaim)
 				.setSubject(userDetails.getUsername())
@@ -53,7 +57,6 @@ public class JwtTokenServiceImpl implements JwtTokenService {
 	}
 
 	private Key getSignKey() {
-		// TODO Auto-generated method stub
 		byte[] byt= Decoders.BASE64.decode(SECRET);
 		return Keys.hmacShaKeyFor(byt);
 	}
@@ -86,15 +89,14 @@ public class JwtTokenServiceImpl implements JwtTokenService {
     public boolean isTokenValid(String token, UserDetails userDetails){
     	
     	final String userName = extractUserName(token);
-    	System.out.println("JwtTokenServiceImpl  --> isTokenValid -userName  "+userName);
-    	System.out.println("JwtTokenServiceImpl  --> isTokenValid -userDetails.getUsername()   "+userDetails.getUsername());
-    	System.out.println("JwtTokenServiceImpl  --> isTokenValid -isTokenExpired(token) "+isTokenExpired(token));
+    	log.info("JwtTokenServiceImpl  --> isTokenValid -userName  "+userName);
+    	log.info("JwtTokenServiceImpl  --> isTokenValid -userDetails.getUsername()   "+userDetails.getUsername());
+    	log.info("JwtTokenServiceImpl  --> isTokenValid -isTokenExpired(token) "+isTokenExpired(token));
     	return (StringUtils.equals(userName, userDetails.getUsername()) && !isTokenExpired(token));
     	
     }
 
 	private boolean isTokenExpired(String token) {
-		// TODO Auto-generated method stub
 		return extractClaim(token, Claims::getExpiration).before(new Date());
 	}
 }

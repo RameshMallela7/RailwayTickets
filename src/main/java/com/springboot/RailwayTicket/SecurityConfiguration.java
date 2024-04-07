@@ -12,17 +12,17 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
-import com.springboot.RailwayTicket.utils.RolesEnum;
-
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 /*
  * 
- * This is binding JWTAuth and UserDetailsService(inbuilt class)
+ * This is binding JWTAuth and UserDetailsService(-> inbuilt class)
  * 
  */
 @Configuration   // 
 @EnableWebSecurity   // need to be together as we use Spring 3.0
 @RequiredArgsConstructor
+@Slf4j
 public class SecurityConfiguration {
 
 	@Autowired
@@ -59,9 +59,8 @@ public class SecurityConfiguration {
                 .sessionManagement(manage -> manage.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authenticationProvider(authenticationProvider)
                 .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
-         System.out.println("securityFilterChain");
+         log.info("securityFilterChain");
          
-         System.out.println(authenticationProvider);
          return http.build();
     }
 

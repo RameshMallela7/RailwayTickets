@@ -2,8 +2,12 @@ package com.springboot.RailwayTicket.utils;
 
 public final class RailwayTicketConstantValues {
 	
+	private RailwayTicketConstantValues() {
+		throw new IllegalStateException("RailwayTicketConstantValues instance");
+	}
+	
 	
 	//  JWT
-	public final static String AUTHORIZATION = "Authorization";
+	static final String AUTHORIZATION = "Authorization";
 
 }

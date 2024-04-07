@@ -1,5 +1,9 @@
 package com.springboot.RailwayTicket.entity;
 
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotEmpty;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -29,9 +33,12 @@ public class Passenger {
 	@Column(name = "passengerId")
 	public Long passengerId;
 	
+	@NotEmpty
 	@Column(name = "name")
 	private String name;
-	
+
+	@Min(value = 5, message = "Age must be at least 5")
+	@Max(value = 100, message = "Age must not exceed 100")
 	@Column(name = "age")
 	private Integer age;
 	

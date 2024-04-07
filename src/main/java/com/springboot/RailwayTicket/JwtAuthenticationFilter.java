@@ -16,14 +16,13 @@ import org.springframework.web.filter.OncePerRequestFilter;
 
 import com.springboot.RailwayTicket.authentication.AuthenticationResponse;
 import com.springboot.RailwayTicket.service.JwtTokenService;
-import com.springboot.RailwayTicket.utils.RailwayTicketConstantValues;
 
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
-import lombok.val;
+import lombok.extern.slf4j.Slf4j;
 
 /*
  * When ever request came to controller, this will act as filter between it, its a gateway
@@ -37,6 +36,7 @@ import lombok.val;
  */
 @Component
 @RequiredArgsConstructor
+@Slf4j
 public class JwtAuthenticationFilter extends OncePerRequestFilter{  // OncePerRequestFilter is provided by spring, internally it implements Filer 
 	
 	@Value("${jwt.header}")
@@ -63,7 +63,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter{  // OncePerRe
 		final String userName;
 		
 		
-		System.out.println("JwtAuthenticationFilter -->authHeader   -> "+ authHeader);
+		log.info("JwtAuthenticationFilter -->authHeader   -> "+ authHeader);
 		
 		if(StringUtils.isEmpty(authHeader) || !StringUtils.startsWith(authHeader, "Bearer ")) {
 			filterChain.doFilter(request, response);
@@ -72,29 +72,29 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter{  // OncePerRe
 		
 		
 		jwt = authHeader.substring(7);
-		System.out.println("JwtAuthenticationFilter -->jwt -->  " + jwt);
+		log.info("JwtAuthenticationFilter -->jwt -->  " + jwt);
 		authenticationResponse.setToken(jwt);
 		
 		userName = jwtTokenService.extractUserName(jwt);
-		System.out.println("JwtAuthenticationFilter -->userName -->  " + userName);
+		log.info("JwtAuthenticationFilter -->userName -->  " + userName);
 		
 		                                       //Check user is already authenticated 
 		if(StringUtils.isNotEmpty(userName) && SecurityContextHolder.getContext().getAuthentication() == null) {
 			UserDetails userDetails = this.userService.loadUserByUsername(userName);
 			
-			System.out.println("JwtAuthenticationFilter -->userDetails -->  " + userDetails.toString());
+			log.info("JwtAuthenticationFilter -->userDetails -->  " + userDetails.toString());
 			
 			if(jwtTokenService.isTokenValid(jwt, userDetails)) {
-				System.out.println("JwtAuthenticationFilter -->isTokenValid");
+				log.info("JwtAuthenticationFilter -->isTokenValid");
 				UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken =
 						new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities());
-				
+					
 				usernamePasswordAuthenticationToken.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
 				
 				
 				SecurityContextHolder.getContext().setAuthentication(usernamePasswordAuthenticationToken);
 				
-				System.out.println("12345");
+				log.info("12345");
 			}
 		}
 		

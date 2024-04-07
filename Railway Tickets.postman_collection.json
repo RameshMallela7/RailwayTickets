@@ -294,9 +294,44 @@
 				},
 				{
 					"name": "fetch_Trains",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{USER-Token}}",
+									"type": "string"
+								}
+							]
+						},
 						"method": "GET",
-						"header": []
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"sourceStation\":\"Hyderabad\",\r\n    \"destinationStation\":\"Chennai\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/railway/fetchTrains",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"railway",
+								"fetchTrains"
+							]
+						}
 					},
 					"response": []
 				},
@@ -317,7 +352,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"passenger\":[\r\n        {\r\n            \"name\":\"King\",\r\n            \"age\":\"29\"\r\n        },{\r\n            \"name\":\"Queen\",\r\n            \"age\":\"30\"\r\n        },{\r\n            \"name\":\"Barb\",\r\n            \"age\":\"40\"\r\n        }\r\n    ],\r\n    \"train\":{\r\n        \"trainId\": 2,\r\n        \"trainNumber\": \"12985\",\r\n        \"trainName\": \"Hyderabad Express\",\r\n        \"sourceStation\": \"Hyderabad\",\r\n        \"destinationStation\": \"Chennai\",\r\n        \"departureTime\": \"19:30:00\",\r\n        \"arrivalTime\": \"05:00:00\",\r\n        \"availableSeats\": 100\r\n    },\r\n    \"bookingDate\":\"2024-04-25\"\r\n}",
+							"raw": "{\r\n    \"passenger\":[\r\n        {\r\n            \"name\":\"King\",\r\n            \"age\":\"29\"\r\n        },{\r\n            \"name\":\"Queen\",\r\n            \"age\":\"30\"\r\n        },{\r\n            \"name\":\"Barb\",\r\n            \"age\":\"40\"\r\n        }\r\n    ],\r\n    \"train\":{\r\n        \"trainId\": 2,\r\n        \"trainNumber\": \"12985\",\r\n        \"trainName\": \"Hyderabad Express\",\r\n        \"sourceStation\": \"Hyderabad\",\r\n        \"destinationStation\": \"Chennai\",\r\n        \"departureTime\": \"19:30:00\",\r\n        \"arrivalTime\": \"05:00:00\",\r\n        \"availableSeats\": 100\r\n    },\r\n    \"bookingDate\":\"2024-06-22\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"

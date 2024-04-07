@@ -2,7 +2,6 @@ package com.springboot.RailwayTicket.service;
 
 import java.time.format.DateTimeFormatter;
 import java.util.List;
-import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
 import org.modelmapper.ModelMapper;
@@ -31,14 +30,13 @@ public class TrainServiceImpl implements TrainService {
 	public void addNewTrainDetails(TrainModel trainModel) {
 		
 		Train train = modelMapper.map(trainModel, Train.class);
-		//train.setDepartureTime(train.getDepartureTime().);
 		trainDao.save(train);
 	}
 	
 	
 	@Override
 	public void addAllNewTrainDetails(List<TrainModel> listOfTrains) {
-		trainDao.saveAll(listOfTrains.stream().map(train -> modelMapper.map(train, Train.class)).collect(Collectors.toList()));
+		trainDao.saveAll(listOfTrains.stream().map(train -> modelMapper.map(train, Train.class)).toList());
 	}
 	
 

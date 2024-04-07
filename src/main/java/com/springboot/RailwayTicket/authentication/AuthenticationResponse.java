@@ -14,5 +14,5 @@ import lombok.NoArgsConstructor;
 @Component
 public class AuthenticationResponse {
 	
-	private String Token;
+	private String token;
 }

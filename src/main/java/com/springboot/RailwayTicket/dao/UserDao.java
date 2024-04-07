@@ -13,6 +13,6 @@ public interface UserDao extends JpaRepository<User, Integer>{
 	//@Query("SELECT u.userName, u.password FROM UserDetail u WHERE u.userName = ?1")
 	Optional<User> findByUserName(String username);
 	
-	//User findByRoles(RolesEnum role);
 	
 }
+	

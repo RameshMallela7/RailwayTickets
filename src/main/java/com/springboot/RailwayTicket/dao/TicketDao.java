@@ -10,7 +10,6 @@ import org.springframework.stereotype.Repository;
 import com.springboot.RailwayTicket.entity.Passenger;
 import com.springboot.RailwayTicket.entity.Ticket;
 import com.springboot.RailwayTicket.entity.Train;
-import com.springboot.RailwayTicket.entity.UserProfile;
 
 @Repository
 public interface TicketDao extends JpaRepository<Ticket, Integer> {

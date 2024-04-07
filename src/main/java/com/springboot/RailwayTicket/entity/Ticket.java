@@ -24,7 +24,6 @@ import lombok.ToString;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-//@ToString(exclude = "UserProfile") 
 @Builder
 @Entity
 @Table(name = "Ticket")

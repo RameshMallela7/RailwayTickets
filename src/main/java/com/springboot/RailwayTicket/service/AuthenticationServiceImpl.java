@@ -19,7 +19,12 @@ import com.springboot.RailwayTicket.entity.User;
 import com.springboot.RailwayTicket.entity.UserProfile;
 import com.springboot.RailwayTicket.excption.UserExcption;
 
+import jakarta.transaction.Transactional;
+import lombok.extern.slf4j.Slf4j;
+
 @Service
+@Transactional
+@Slf4j
 public class AuthenticationServiceImpl implements AuthenticationService {
 
 	@Autowired
@@ -47,7 +52,7 @@ public class AuthenticationServiceImpl implements AuthenticationService {
 	
 	@Override
 	public AuthenticationResponse createUser(RegisterRequest registerRequest) {
-		System.out.println("get data to service " + registerRequest.toString());
+		log.info("get data to service " + registerRequest.toString());
 		try {
 			
 			User user = User.builder()
@@ -63,7 +68,7 @@ public class AuthenticationServiceImpl implements AuthenticationService {
 					.build();
 			
 			User uer =  userDao.save(user);
-			System.out.println(uer.toString());
+			log.info(uer.toString());
 			
 			if(StringUtils.equals(user.getUsername(), registerRequest.getUserName())){
 				
@@ -72,14 +77,14 @@ public class AuthenticationServiceImpl implements AuthenticationService {
 				
 				String token = jwtTokenService.generateToken(new HashMap<>(),user);
 				
-				System.out.println(token);
+				log.info(token);
 				return AuthenticationResponse.builder()
-						.Token(token)
+						.token(token)
 						.build();
 			}
 			
 		}catch (Exception e) {
-			System.out.println("Exception while inserting data in DB");
+			log.info("Exception while inserting data in DB");
 			throw new UserExcption(e.getMessage());
 		}
 		return null;
@@ -88,23 +93,19 @@ public class AuthenticationServiceImpl implements AuthenticationService {
 	
 	@Override
 	public AuthenticationResponse login(AuthenticationRequest authenticationRequest) {
-		System.out.println("!!!!!!!!!!!!!!");
+		log.info("!!!!!!!!!!!!!!");
 		
 		authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(
 				authenticationRequest.getUsername(), authenticationRequest.getPassword()));
 		
-		System.out.println("@@@@@@@@@@@@@@@@");
+		log.info("@@@@@@@@@@@@@@@@");
 		
 		User user = userDao.findByUserName(authenticationRequest.getUsername())
 				.orElseThrow(() -> new IllegalArgumentException("User details ot found"));
 		
-		System.out.println(user.toString()); 
-		
-		
+		log.info(user.toString()); 
 		String  jwtToken = jwtTokenService.generateToken(user);
-		//String refreshToken  =  jwtTokenService.refreshToken(new HashMap<>(), user);
 		
-		
-		return AuthenticationResponse.builder().Token(jwtToken).build();
+		return AuthenticationResponse.builder().token(jwtToken).build();
 	}
 }

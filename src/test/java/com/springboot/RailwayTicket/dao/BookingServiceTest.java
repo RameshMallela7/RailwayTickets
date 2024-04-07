@@ -1,19 +1,14 @@
 package com.springboot.RailwayTicket.dao;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
-import java.util.List;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
-import org.springframework.beans.factory.annotation.Autowired;
 
 import com.springboot.RailwayTicket.entity.Passenger;
 import com.springboot.RailwayTicket.entity.Train;
@@ -30,12 +25,6 @@ public class BookingServiceTest {
 	@Mock
 	private TicketDao dao;
 	
-	/*
-	BookingRequestModel(train=Train(trainId=2, trainNumber=12985, trainName=Hyderabad Express, sourceStation=Hyderabad, destinationStation=Chennai,
-	 departureTime=19:30, arrivalTime=05:00, availableSeats=100), passenger=[Passenger(passengerId=0, name=King, age=20, seatNumber=null), 
-	 Passenger(passengerId=0, name=Queen, age=18, seatNumber=null), Passenger(passengerId=0, name=Barr, age=38, seatNumber=null)], bookingDate=2024-04-25)
-
-	 */
 	//@Test
 	public void TestBookingService() {
 		Train train = Train.builder()

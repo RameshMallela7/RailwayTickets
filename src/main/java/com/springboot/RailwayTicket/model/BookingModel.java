@@ -1,11 +1,8 @@
 package com.springboot.RailwayTicket.model;
 
 import java.time.LocalDate;
-import java.util.List;
 
-import com.springboot.RailwayTicket.entity.Passenger;
 import com.springboot.RailwayTicket.entity.Ticket;
-import com.springboot.RailwayTicket.entity.Train;
 import com.springboot.RailwayTicket.entity.UserProfile;
 
 import lombok.AllArgsConstructor;
@@ -23,8 +20,6 @@ public class BookingModel {
 	
 	public Long bookingId;
 	public UserProfile userProfile;
-	//private Train train;
-	//private List<Passenger> passenger;
 	public Ticket ticket;
 	public LocalDate bookingDate;
 	public String status;

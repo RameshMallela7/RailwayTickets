@@ -37,10 +37,12 @@ public class Train {
 	@Column(name= "trainId")
 	public Integer trainId; //: Unique identifier for the train.
 	
-	@Column(name = "trainNumber")
+	@Column(name = "trainNumber",
+			unique = true)
 	public String trainNumber; //: Train number (e.g., 12345).
 	
-	@Column(name = "trainName")
+	@Column(name = "trainName",
+			unique = true)
 	public String trainName; //: Name of the train.
 	
 	@Column(name = "sourceStation")
