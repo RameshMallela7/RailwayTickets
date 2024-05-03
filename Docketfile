@@ -1,4 +1,4 @@
 FROM openjdk:17
 EXPOSE 9091
-ADD target/RailwayTicket.war RailwayTicket.war
-ENTRTPOINT ["java","-war","/RailwayTicket.war"]
+ADD target/railway_ticket.jar railway_ticket.jar
+ENTRTPOINT ["java","-jar","/railway_ticket.jar"]
