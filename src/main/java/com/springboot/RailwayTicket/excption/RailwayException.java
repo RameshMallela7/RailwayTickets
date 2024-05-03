@@ -16,7 +16,6 @@ public class RailwayException extends Exception {
 
 	public RailwayException(String message, int statusCode){
 		super(message);
-		
 		this.message = message;
 		this.statusCode = statusCode;
 		

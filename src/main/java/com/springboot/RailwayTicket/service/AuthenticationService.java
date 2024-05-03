@@ -11,7 +11,7 @@ public interface AuthenticationService {
 
 	AuthenticationResponse login(AuthenticationRequest authenticationRequest);
 
-	AuthenticationResponse createUser(RegisterRequest registerRequest);
+	AuthenticationResponse createUser(RegisterRequest registerRequest) throws Exception;
 
 	boolean userNameIsPresent(String userName);
 

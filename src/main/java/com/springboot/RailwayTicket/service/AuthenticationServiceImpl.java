@@ -17,7 +17,7 @@ import com.springboot.RailwayTicket.dao.UserDao;
 import com.springboot.RailwayTicket.dao.UserProfileDao;
 import com.springboot.RailwayTicket.entity.User;
 import com.springboot.RailwayTicket.entity.UserProfile;
-import com.springboot.RailwayTicket.excption.UserExcption;
+import com.springboot.RailwayTicket.mail.SendMail;
 
 import jakarta.transaction.Transactional;
 import lombok.extern.slf4j.Slf4j;
@@ -45,15 +45,22 @@ public class AuthenticationServiceImpl implements AuthenticationService {
 	@Autowired
 	private UserProfileDao userProfileDao;
 	
+	@Autowired
+	private SendMail sendMail;
+	
 	@Override
 	public boolean userNameIsPresent(String userName) {
 		return userProfileDao.findByUserName(userName).isPresent();
 	}
 	
 	@Override
-	public AuthenticationResponse createUser(RegisterRequest registerRequest) {
+	public AuthenticationResponse createUser(RegisterRequest registerRequest) throws Exception {
 		log.info("get data to service " + registerRequest.toString());
 		try {
+			
+			/*if(!sendMail.emailIsValid(registerRequest.getEmail())) {
+				throw new UserExcption("invalid Email address provided", HttpStatus.BAD_REQUEST.value());
+			}*/
 			
 			User user = User.builder()
 					.userName(registerRequest.getUserName())
@@ -85,7 +92,7 @@ public class AuthenticationServiceImpl implements AuthenticationService {
 			
 		}catch (Exception e) {
 			log.info("Exception while inserting data in DB");
-			throw new UserExcption(e.getMessage());
+			throw new Exception("Exception while inserting data in DB" + e.getMessage());
 		}
 		return null;
 	}

@@ -13,7 +13,6 @@ public class RailwayTicketApplication implements CommandLineRunner {
 
 	@Override
 	public void run(String... args) throws Exception {
-		
 	}
 
 }  

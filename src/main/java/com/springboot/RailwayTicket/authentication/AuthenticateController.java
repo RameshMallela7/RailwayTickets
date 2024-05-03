@@ -31,7 +31,7 @@ public class AuthenticateController {
 	}
 	
 	@PostMapping("/registration")   //  Add User details
-	public ResponseEntity<String> createUser(@RequestBody RegisterRequest registerRequest){
+	public ResponseEntity<String> createUser(@RequestBody RegisterRequest registerRequest) throws Exception{
 		
 		if(authenticationService.userNameIsPresent(registerRequest.getUserName())) {
 			return new ResponseEntity<>("User name already exists", HttpStatus.CONFLICT);
