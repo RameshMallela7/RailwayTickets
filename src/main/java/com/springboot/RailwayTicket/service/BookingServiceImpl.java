@@ -76,17 +76,17 @@ public class BookingServiceImpl implements BookingService {
 
 	@Override
 	public BookingModel doBooking(BookingRequestModel bookingRequestModel) throws Exception {
-		log.info("BookingServiceImpl -- doBooking_1 --  bookingRequestModel.toString() " + bookingRequestModel.toString());
+		log.info("doBooking_1 --  bookingRequestModel.toString() " + bookingRequestModel.toString());
 		
 		try {
 			UserProfile  currentUserProfile = railwayTicketUtils.getUserProfileDetails();
-			log.info("BookingServiceImpl -- doBooking_1  currentUserProfile  ->"+ currentUserProfile);
+			log.info("doBooking_1  currentUserProfile  ->"+ currentUserProfile);
 			
 			List<Passenger> passengerList = setSeatNumberMethod(
 					bookingRequestModel.getTrain(),
 					bookingRequestModel.getPassenger());
 			
-			passengerList.forEach(n ->log.info("BookingServiceImpl -- doBooking_1 - passengerList > "+n));
+			passengerList.forEach(n ->log.info("doBooking_1 - passengerList > "+n));
 			
 			Train trainGetById= trainDao.findById(bookingRequestModel.getTrain().getTrainId()).get();
 			
@@ -105,7 +105,9 @@ public class BookingServiceImpl implements BookingService {
 			//This *save* will insert Passengers, Ticket & Booking also
 			Booking bookingResponse = bookingDao.save(bookingDetails);
 			
-			log.info("BookingServiceImpl -- doBooking_1 - bookingResponse -> "+bookingResponse.toString());
+			log.info("doBooking_1 - bookingResponse -> "+bookingResponse.toString());
+			
+			updateSeatNumberinTrain(trainGetById, passengerList.size());
 			
 			return BookingModel.builder()
 					.bookingId(bookingResponse.getBookingId())
@@ -120,10 +122,15 @@ public class BookingServiceImpl implements BookingService {
 		}catch (Exception ex) {
 			throw new Exception("Error occurred during booking: " + ex.getMessage());
 		}
-
-		
 	}
 
+	
+	private void updateSeatNumberinTrain(Train trainGetById, int noOfSeats) {
+		trainGetById.setAvailableSeats(trainGetById.getAvailableSeats() - noOfSeats);
+		trainDao.save(trainGetById);
+	}
+
+	
 	private List<Passenger> setSeatNumberMethod(
 			Train train, 
 			List<Passenger> passengers) throws Exception {
