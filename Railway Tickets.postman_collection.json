@@ -27,12 +27,12 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:8080/api/auth/welcome",
+							"raw": "http://{{host}}:{{portNo}}/api/auth/welcome",
 							"protocol": "http",
 							"host": [
-								"localhost"
+								"{{host}}"
 							],
-							"port": "8080",
+							"port": "{{portNo}}",
 							"path": [
 								"api",
 								"auth",
@@ -52,7 +52,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n\t\"userName\": \"Sham200\",\r\n\t\"password\":\"sham\",\r\n\t\"email\":\"shamh@gmail.com\",\r\n\t\"firstName\": \"Sham\",\r\n\t\"lastName\":\"Kumar\",\r\n\t\"dateOfBirth\":\"1995-02-28\",\r\n\t\"phoneNumber\":8106110252,\r\n\t\"address\": \"xyz address\",\r\n    \"role\":\"ADMIN\"\r\n}",
+							"raw": "{\r\n\t\"userName\": \"Sham203\",\r\n\t\"password\":\"sham\",\r\n\t\"email\":\"qasdwffddffggfbfrere@gmail.com\",\r\n\t\"firstName\": \"Sham\",\r\n\t\"lastName\":\"Kumar\",\r\n\t\"dateOfBirth\":\"1995-02-28\",\r\n\t\"phoneNumber\":8106110251,\r\n\t\"address\": \"xyz address\",\r\n    \"role\":\"ADMIN\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -60,12 +60,12 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:8080/api/auth/registration",
+							"raw": "http://{{host}}:{{portNo}}/api/auth/registration",
 							"protocol": "http",
 							"host": [
-								"localhost"
+								"{{host}}"
 							],
-							"port": "8080",
+							"port": "{{portNo}}",
 							"path": [
 								"api",
 								"auth",
@@ -93,12 +93,12 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:8080/api/auth/registration",
+							"raw": "http://{{host}}:{{portNo}}/api/auth/registration",
 							"protocol": "http",
 							"host": [
-								"localhost"
+								"{{host}}"
 							],
-							"port": "8080",
+							"port": "{{portNo}}",
 							"path": [
 								"api",
 								"auth",
@@ -123,12 +123,12 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:8080/api/auth/login",
+							"raw": "http://{{host}}:{{portNo}}/api/auth/login",
 							"protocol": "http",
 							"host": [
-								"localhost"
+								"{{host}}"
 							],
-							"port": "8080",
+							"port": "{{portNo}}",
 							"path": [
 								"api",
 								"auth",
@@ -159,12 +159,12 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8080/api/admin/login/getAdminProfile",
+							"raw": "http://{{host}}:{{portNo}}/api/admin/login/getAdminProfile",
 							"protocol": "http",
 							"host": [
-								"localhost"
+								"{{host}}"
 							],
-							"port": "8080",
+							"port": "{{portNo}}",
 							"path": [
 								"api",
 								"admin",
@@ -192,7 +192,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"trainNumber\":\"12700\",\r\n    \"trainName\":\"Vande Barath\",\r\n    \"sourceStation\":\"Vijayavada\",\r\n    \"destinationStation\":\"Chennai\",\r\n    \"departureTime\":\"06:30\",\r\n    \"arrivalTime\":\"14:00\",\r\n    \"availableSeats\":\"100\"\r\n}",
+							"raw": "{\r\n    \"trainNumber\":\"12700\",\r\n    \"trainName\":\"Simhapur Barath\",\r\n    \"sourceStation\":\"Bengaluru\",\r\n    \"destinationStation\":\"Chennai\",\r\n    \"departureTime\":\"20:30\",\r\n    \"arrivalTime\":\"07:00\",\r\n    \"availableSeats\":\"95\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -200,12 +200,12 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:8080/api/admin/addNewTrain",
+							"raw": "http://{{host}}:{{portNo}}/api/admin/addNewTrain",
 							"protocol": "http",
 							"host": [
-								"localhost"
+								"{{host}}"
 							],
-							"port": "8080",
+							"port": "{{portNo}}",
 							"path": [
 								"api",
 								"admin",
@@ -232,7 +232,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "[\r\n    {\r\n    \"trainNumber\":\"12985\",\r\n    \"trainName\":\"Hyderabad Express\",\r\n    \"sourceStation\":\"Hyderabad\",\r\n    \"destinationStation\":\"Chennai\",\r\n    \"departureTime\":\"19:30\",\r\n    \"arrivalTime\":\"05:00\",\r\n    \"availableSeats\":\"100\"\r\n},{\r\n    \"trainNumber\":\"12288\",\r\n    \"trainName\":\"Chennai Express\",\r\n    \"sourceStation\":\"Chennai\",\r\n    \"destinationStation\":\"Hyderbad\",\r\n    \"departureTime\":\"06:30\",\r\n    \"arrivalTime\":\"18:30\",\r\n    \"availableSeats\":\"80\"\r\n},{\r\n    \"trainNumber\":\"12700\",\r\n    \"trainName\":\"Vande Barath\",\r\n    \"sourceStation\":\"Vijayavada\",\r\n    \"destinationStation\":\"Chennai\",\r\n    \"departureTime\":\"06:30\",\r\n    \"arrivalTime\":\"14:00\",\r\n    \"availableSeats\":\"100\"\r\n}\r\n]",
+							"raw": "[\r\n    {\r\n    \"trainNumber\":\"12985\",\r\n    \"trainName\":\"Hyderabad Express\",\r\n    \"sourceStation\":\"Hyderabad\",\r\n    \"destinationStation\":\"Chennai\",\r\n    \"departureTime\":\"19:30\",\r\n    \"arrivalTime\":\"05:00\",\r\n    \"availableSeats\":\"100\"\r\n},{\r\n    \"trainNumber\":\"12288\",\r\n    \"trainName\":\"Chennai Express\",\r\n    \"sourceStation\":\"Chennai\",\r\n    \"destinationStation\":\"Hyderbad\",\r\n    \"departureTime\":\"06:30\",\r\n    \"arrivalTime\":\"18:30\",\r\n    \"availableSeats\":\"80\"\r\n},{\r\n    \"trainNumber\":\"12033\",\r\n    \"trainName\":\"Sercar Express\",\r\n    \"sourceStation\":\"Tirupath\",\r\n    \"destinationStation\":\"Vijayavada\",\r\n    \"departureTime\":\"08:30\",\r\n    \"arrivalTime\":\"19:00\",\r\n    \"availableSeats\":\"60\"\r\n},{\r\n    \"trainNumber\":\"12008\",\r\n    \"trainName\":\"Penakini Passenger\",\r\n    \"sourceStation\":\"Vijavada\",\r\n    \"destinationStation\":\"Tirupath\",\r\n    \"departureTime\":\"05:30\",\r\n    \"arrivalTime\":\"14:00\",\r\n    \"availableSeats\":\"120\"\r\n}\r\n]",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -240,12 +240,12 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:8080/api/admin/addAllNewTrains",
+							"raw": "http://{{host}}:{{portNo}}/api/admin/addAllNewTrains",
 							"protocol": "http",
 							"host": [
-								"localhost"
+								"{{host}}"
 							],
-							"port": "8080",
+							"port": "{{portNo}}",
 							"path": [
 								"api",
 								"admin",
@@ -268,7 +268,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJwdW5lZXRoMjAwIiwiaWF0IjoxNzExNjM5ODkwLCJleHAiOjE3MTE2NDEzMzB9._6rQXBf6MkL5W9yrC8m6mUq96lsbGachn6De4Hj6Kl0",
+									"value": "{{USER-Token}}",
 									"type": "string"
 								}
 							]
@@ -276,12 +276,12 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8080/api/user/login/getuserProfile",
+							"raw": "http://localhost:{{portNo}}/api/user/login/getuserProfile",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
-							"port": "8080",
+							"port": "{{portNo}}",
 							"path": [
 								"api",
 								"user",
@@ -320,12 +320,12 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:8080/api/railway/fetchTrains",
+							"raw": "http://{{host}}:{{portNo}}/api/railway/fetchTrains",
 							"protocol": "http",
 							"host": [
-								"localhost"
+								"{{host}}"
 							],
-							"port": "8080",
+							"port": "{{portNo}}",
 							"path": [
 								"api",
 								"railway",
@@ -352,7 +352,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"passenger\":[\r\n        {\r\n            \"name\":\"King\",\r\n            \"age\":\"29\"\r\n        },{\r\n            \"name\":\"Queen\",\r\n            \"age\":\"30\"\r\n        },{\r\n            \"name\":\"Barb\",\r\n            \"age\":\"40\"\r\n        }\r\n    ],\r\n    \"train\":{\r\n        \"trainId\": 2,\r\n        \"trainNumber\": \"12985\",\r\n        \"trainName\": \"Hyderabad Express\",\r\n        \"sourceStation\": \"Hyderabad\",\r\n        \"destinationStation\": \"Chennai\",\r\n        \"departureTime\": \"19:30:00\",\r\n        \"arrivalTime\": \"05:00:00\",\r\n        \"availableSeats\": 100\r\n    },\r\n    \"bookingDate\":\"2024-06-22\"\r\n}",
+							"raw": "{\r\n    \"passenger\":[\r\n        {\r\n            \"name\":\"Car\",\r\n            \"age\":\"29\"\r\n        },{\r\n            \"name\":\"Auto\",\r\n            \"age\":\"30\"\r\n        }\r\n    ],\r\n    \"train\":{\r\n        \"trainId\": 2,\r\n        \"trainNumber\": \"12985\",\r\n        \"trainName\": \"Hyderabad Express\",\r\n        \"sourceStation\": \"Hyderabad\",\r\n        \"destinationStation\": \"Chennai\",\r\n        \"departureTime\": \"19:30:00\",\r\n        \"arrivalTime\": \"05:00:00\",\r\n        \"availableSeats\": 100\r\n    },\r\n    \"bookingDate\":\"2024-05-11\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -360,12 +360,12 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:8080/api/railway/doBooking",
+							"raw": "http://{{host}}:{{portNo}}/api/railway/doBooking",
 							"protocol": "http",
 							"host": [
-								"localhost"
+								"{{host}}"
 							],
-							"port": "8080",
+							"port": "{{portNo}}",
 							"path": [
 								"api",
 								"railway",
@@ -383,7 +383,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "{{USER-Token}}",
+									"value": "{{ADMIN-Token}}",
 									"type": "string"
 								}
 							]
@@ -400,12 +400,12 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:8080/api/railway/doBooking",
+							"raw": "http://{{host}}:{{portNo}}/api/railway/doBooking",
 							"protocol": "http",
 							"host": [
-								"localhost"
+								"{{host}}"
 							],
-							"port": "8080",
+							"port": "{{portNo}}",
 							"path": [
 								"api",
 								"railway",
